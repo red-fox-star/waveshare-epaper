@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>PriceTag</title>
+    <link rel='stylesheet' href='styles.css'>
+    <script src='scriptA.js'></script>
+    <script src='scriptB.js'></script>
+    <script src='scriptC.js'></script>
+    <script src='scriptD.js'></script>
+</head>
+
+<body>
+    <div class='header_back'>
+        <div class='header_face'></div>
+    </div>
+    <div class='content_back'>
+        <div class='content_face'>
+            <table style='width:100%; height:100%' border='0' cellspacing='0'>
+                <tr>
+                    <td class='menu_bar' rowspan='2'>
+                        <div id='BT'></div>
+                        <table>
+                            <tr>
+                                <td class='comment' colspan='4'><br>Device IP:</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><input id="ip_addr" style="width:100%;text-align:center" type="text" value="
+172.16.0.87"></td>
+                            </tr>
+                            <tr>
+                                <td class='comment' colspan='4'><br>Bounds:</td>
+                            </tr>
+                            <tr id='XY'></tr>
+                            <tr id='WH'></tr>
+                        </table>
+                        <div id='RB'></div>
+                    </td>
+                    <td class='content_body'>
+                        <span class='title'>Original image</span><br>
+                        <canvas id='source' class='hidden_input'></canvas>
+                        <div id='srcBox'>
+                            <div class='imgBox'>
+                                <div class='mesBox'>Drop image here...</div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td id='dstBox' class='content_body'>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class='footer_back'>
+        <div class='footer_face' id='logTag'>
+        </div>
+    </div>
+</body>
+
+</html>

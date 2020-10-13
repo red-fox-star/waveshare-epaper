@@ -1,0 +1,105 @@
+.menu_button {
+     width: 100%;
+     height: 50px;
+     border-radius: 4px;
+     text-align: center;
+     cursor: pointer;
+     display: block;
+     margin-bottom:5px;
+     font: 14px/50px Tahoma;
+     transition: all 0.18s ease-in-out;
+     border: 1px solid #4FD666;
+     background: linear-gradient(to top right, #3EC97A, #69EA49 20%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 0)) top right/500% 500%;
+     color: green;
+}
+ .menu_button:hover {
+     color: white;
+     background-position: bottom left;
+}
+ .hidden_input {
+     width: 0.1px;
+     height: 0.1px;
+     opacity: 0;
+     overflow: hidden;
+     position: absolute;
+     z-index: -1;
+}
+ .imgBox {
+     border: 2px dashed green;
+     border-radius: 8px;
+     background: lightyellow;
+     background-repeat: no-repeat;
+     text-align: center;
+     margin-top:10px;
+}
+ .mesBox {
+     margin: 100px 70px;
+     color: green;
+     font-size: 25px;
+     font-family: Verdana, Arial, sans-serif;
+}
+ .header_back {
+     width:100%;
+     height:100px;
+     background:#EEEEEE;
+}
+ .content_back {
+     width:100%;
+     background:#EEEEEE;
+}
+ .footer_back {
+     width:100%;
+     height:100px;
+     background:#EEEEEE;
+}
+ .header_face {
+     width:1024px;
+     height:100px;
+     margin:0 auto;
+     background:#CCFFCC;
+}
+ .content_face {
+     width:1024px;
+     height:100%;
+     margin:0 auto;
+     background:#FFFFFF;
+}
+ .footer_face {
+     width:1024px;
+     height:100%;
+     margin:0 auto;
+     background:#CCFFCC;
+}
+ .menu_bar {
+     border-right:1px solid #4FD666;
+     background:#EEFFEE;
+     vertical-align:top;
+     padding:15px;
+     width:200px;
+     height:100% 
+}
+ .content_body {
+     vertical-align:top;
+     text-align:center;
+     height:100%;
+     padding:30px;
+     padding-left:15px;
+}
+ .title {
+     color:green;
+     font-size:32px;
+     font-family: arial;
+}
+ .comment {
+     width:100%;
+     color:green;
+     font-size:16px;
+     font-style:italic;
+     font-family: arial;
+     text-align:center;
+}
+ .nud {
+     width:70px;
+}
+);
+ 
