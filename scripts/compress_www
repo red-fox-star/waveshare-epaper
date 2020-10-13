@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# you probably want: brew install tdewolff/tap/minify
+
+echo "Minifying and Compressing ..."
+
+[ -d data ] && rm -r data
+
+mkdir -p data
+
+find www -name ".DS_Store" -delete
+
+minify -r -o data www
+find data -type f -exec gzip -9 {} \;
+
+# remove files which are needed for development but not for deployment
+rm data/radiate/scan.json.gz

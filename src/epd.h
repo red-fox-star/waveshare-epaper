@@ -33,10 +33,6 @@
 #define PIN_SPI_RST  26//21
 #define PIN_SPI_DC   27//22
 
-/* Pin level definition ------------------------------------------------------*/
-#define LOW             0
-#define HIGH            1
-
 #define GPIO_PIN_SET   1
 #define GPIO_PIN_RESET 0
 

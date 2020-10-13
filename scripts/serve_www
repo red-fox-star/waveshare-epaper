@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+port=${PORT:-3000}
+
+ruby -rwebrick -e "
+  WEBrick::HTTPServer.new(
+    :BindAddress => '0.0.0.0',
+    :Port => $port,
+    :DocumentRoot => Dir.pwd.+('/www')
+  ).start
+"

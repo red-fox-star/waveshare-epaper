@@ -1,0 +1,45 @@
+{
+  "comment": "This file is for testing and debugging a locally served radiate portal and isn't used by radiate when deployed.",
+  "networks": [
+    {
+      "ssid": "xfinitywifi",
+      "rssi": -44,
+      "encryption_type": "3"
+    },
+    {
+      "ssid": "Verizon Hotspot",
+      "rssi": -54,
+      "encryption_type": "3"
+    },
+    {
+      "ssid": "xfinitywifi",
+      "rssi": -44,
+      "encryption_type": "3"
+    },
+    {
+      "ssid": "Verizon Hotspot",
+      "rssi": -54,
+      "encryption_type": "3"
+    },
+    {
+      "ssid": "xfinitywifi",
+      "rssi": -44,
+      "encryption_type": "3"
+    },
+    {
+      "ssid": "Verizon Hotspot",
+      "rssi": -54,
+      "encryption_type": "3"
+    },
+    {
+      "ssid": "xfinitywifi",
+      "rssi": -44,
+      "encryption_type": "3"
+    },
+    {
+      "ssid": "Verizon Hotspot",
+      "rssi": -54,
+      "encryption_type": "3"
+    }
+  ]
+}

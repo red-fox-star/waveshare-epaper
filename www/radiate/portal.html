@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Radiate</title>
+    <meta charset='utf-8'>
+    <meta name=viewport content='width=device-width, initial-scale=1'>
+    <style type=text/css>
+      body { font: large sans-serif; margin: 1rem 0 0 }
+
+      input[type=password], input[type=text] { font: x-large sans-serif; }
+
+      h2 { text-align: center; padding-bottom: 1em; }
+      form > div { margin-top: 1rem; }
+
+      #submit input  {
+        border: 1px solid #ccc;
+        background: #ccc;
+        font: x-large sans-serif;
+      }
+
+      .max-width { max-width: 23em; margin: 0 auto }
+      .hidden { display: none }
+      .flex { display: flex; justify-content: center; }
+      .rdio input { display: none }
+      .full-width {
+        display: block;
+        width: 100%;
+        padding: 1rem;
+        margin: 0 auto;
+      }
+      .rdio input:checked+label {
+        background-color: cadetblue;
+      }
+    </style>
+    <script>
+      const radio = function (name, id, value) {
+        const tag = document.createElement('input')
+        tag.type = 'radio'
+        tag.name = name
+        tag.id = id
+        tag.value = value
+        return tag
+      }
+
+      const label = function (id, text) {
+        const tag = document.createElement('label')
+        tag.setAttribute('for', id)
+        tag.textContent = text
+        return tag
+      }
+
+      const div = function (...classList) {
+        const tag = document.createElement('div')
+        classList.forEach(clss => tag.classList.add(clss))
+        return tag
+      }
+
+      const toggleClass = function(element, clss, enabled) {
+        if (enabled)
+          document.getElementById(element).classList.add(clss)
+        else
+          document.getElementById(element).classList.remove(clss)
+      }
+
+      const networkChosen = function (evt) {
+        toggleClass('submit', 'hidden', false)
+        toggleClass('network_entry', 'hidden', evt.target.dataset.enable_ssid_entry != 'true')
+        toggleClass('password','hidden', evt.target.dataset.password_required != 'true')
+      }
+
+      // wifi network.encryption_type
+      // 0 WIFI_AUTH_OPEN
+      // 1 WIFI_AUTH_WEP
+      // 2 WIFI_AUTH_WPA_PSK
+      // 3 WIFI_AUTH_WPA2_PSK
+      // 4 WIFI_AUTH_WPA_WPA2_PSK
+      // 5 WIFI_AUTH_WPA2_ENTERPRISE
+      // 6 WIFI_AUTH_MAX
+
+      const network_option = function (network) {
+        let network_div = div('rdio','flex')
+        let rdio = radio('chosen_ssid', `ssid_${network.ssid}`, network.ssid)
+        rdio.dataset.password_required = network.encryption_type != "0"
+        rdio.addEventListener('click', networkChosen)
+
+        let lbl = label(`ssid_${network.ssid}`, network.ssid)
+        lbl.classList.add('full-width')
+
+        network_div.appendChild(rdio)
+        network_div.appendChild(lbl)
+        return network_div
+      }
+
+      const scan = function () {
+        let network = fetch('scan.json', {credentials: 'same-origin'})
+
+        toggleClass('spinner','hidden',false)
+        toggleClass('network_entry','hidden',true)
+        toggleClass('password','hidden',true)
+        toggleClass('submit','hidden',true)
+
+        network
+          .then(response => response.json())
+          .then(response => {
+            let list = div()
+
+            response.networks
+              .filter((network, this_index, list) => { // remove duplicates by ssid
+                first_index = list.findIndex(e => e.ssid == network.ssid)
+                return first_index == this_index
+              })
+              .sort((a, b) => b.rssi - a.rssi)
+              .forEach( network => list.appendChild(network_option(network)) )
+
+            let other_option = network_option({ssid: 'Other'})
+            other_option.getElementsByTagName('input')[0].dataset.enable_ssid_entry = true
+            list.appendChild(other_option)
+
+            let chooser = document.getElementById('network_chooser')
+            chooser.appendChild(list)
+            chooser.classList.remove('hidden')
+
+            toggleClass('spinner','hidden',true)
+         })
+      }
+
+      window.addEventListener('load', _ => scan())
+    </script>
+  </head>
+  <body>
+    <h2 class=max-width>pLnt</h2>
+    <div id=spinner class='hidden max-width'>
+      <div class=flex>
+        <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
+        <img alt=spinner src="data:image/svg+xml,%3csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg' stroke='black'%3e %3cg fill='none' fill-rule='evenodd' stroke-width='2'%3e %3ccircle cx='22' cy='22' r='1'%3e %3canimate attributeName='r' begin='0s' dur='1.8s' values='1%3b 20' calcMode='spline' keyTimes='0%3b 1' keySplines='0.165%2c 0.84%2c 0.44%2c 1' repeatCount='indefinite' /%3e %3canimate attributeName='stroke-opacity' begin='0s' dur='1.8s' values='1%3b 0' calcMode='spline' keyTimes='0%3b 1' keySplines='0.3%2c 0.61%2c 0.355%2c 1' repeatCount='indefinite' /%3e %3c/circle%3e %3ccircle cx='22' cy='22' r='1'%3e %3canimate attributeName='r' begin='-0.9s' dur='1.8s' values='1%3b 20' calcMode='spline' keyTimes='0%3b 1' keySplines='0.165%2c 0.84%2c 0.44%2c 1' repeatCount='indefinite' /%3e %3canimate attributeName='stroke-opacity' begin='-0.9s' dur='1.8s' values='1%3b 0' calcMode='spline' keyTimes='0%3b 1' keySplines='0.3%2c 0.61%2c 0.355%2c 1' repeatCount='indefinite' /%3e %3c/circle%3e %3c/g%3e %3c/svg%3e">
+        <p>Scanning Wifi</p>
+      </div>
+    </div>
+    <form method=post action=save class=max-width>
+      <div id=network_chooser class=hidden>
+      </div>
+      <hr>
+      <div id=network_entry>
+        <label for=ssid>Wifi Network
+          <input id=ssid name=ssid type=text maxlength=32>
+        </label>
+      </div>
+      <div id=password>
+        <label for=pass>
+          Password
+          <input id=pass name=pass type=password>
+        </label>
+      </div>
+      <div id=submit>
+        <input type=submit value=Connect class=full-width>
+      </div>
+    </form>
+  </body>
+</html>

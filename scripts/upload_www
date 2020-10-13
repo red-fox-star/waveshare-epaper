@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+read -p "Upload to board? [NO|yes] " -r
+
+if [[ "$REPLY" != "yes" ]]
+then
+  echo "abort. exit. $REPLY != yes"
+  exit 1
+fi
+
+platformio run --target uploadfs

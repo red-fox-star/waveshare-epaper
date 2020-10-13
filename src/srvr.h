@@ -14,7 +14,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 //#include <ESP8266WiFi.h>// ESP8266 and WiFi classes
-#include <WiFi.h>
 
 #include "buff.h" // POST request data accumulator
 #include "epd.h"  // e-Paper driver
@@ -23,39 +22,16 @@
 #include "css.h"     // Cascading Style Sheets
 #include "html.h"    // HTML page of the tool
 
-/* SSID and password of your WiFi net ----------------------------------------*/
-const char *ssid = "Waveshare-TL-WR886N"; //"your ssid";
-const char *password = "waveshare0755";   //"your password";
+WiFiServer server(80);
+IPAddress myIP;
 
 /* Server and IP address ------------------------------------------------------*/
 WiFiServer server(80); // Wifi server exemplar using port 80
 IPAddress myIP;        // IP address in your local wifi net
+bool isIndexPage = true;
 
-/* The 'index' page flag ------------------------------------------------------*/
-bool isIndexPage = true; // true : GET  request, client needs 'index' page;
-// false: POST request, server sends empty page.
-/* Server initialization -------------------------------------------------------*/
 void Srvr__setup()
 {
-    Serial.println();
-    Serial.println();
-    Serial.print("Connecting to ");
-    Serial.println(ssid);
-
-    // Applying SSID and password
-    WiFi.begin(ssid, password);
-
-    // Waiting the connection to a router
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");
-    }
-
-    // Connection is complete
-    Serial.println("");
-
-    Serial.println("WiFi connected");
-
     // Start the server
     server.begin();
     Serial.println("Server started");
