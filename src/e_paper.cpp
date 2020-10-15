@@ -1,5 +1,6 @@
 #include <Arduino.h>
 
+#include "old_srvr.h"
 #include "srvr.h"
 
 #include <radiate.h>
