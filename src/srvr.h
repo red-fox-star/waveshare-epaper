@@ -21,21 +21,16 @@ Srvr::Srvr() {
 
 void Srvr::init() {
 
-
-  web.serveStatic("/", SPIFFS, "/epd/index.html");
+  // web.serveStatic("/", SPIFFS, "/epd/index.html");
   web.serveStatic("/index.html", SPIFFS, "/epd/index.html");
   web.serveStatic("/scriptA.js", SPIFFS, "/epd/scriptA.js");
   web.serveStatic("/scriptB.js", SPIFFS, "/epd/scriptB.js");
   web.serveStatic("/scriptC.js", SPIFFS, "/epd/scriptC.js");
-  web.serveStatic("/style.css", SPIFFS, "/epd/style.css");
+  web.serveStatic("/scriptD.js", SPIFFS, "/epd/scriptD.js");
+  web.serveStatic("/styles.css", SPIFFS, "/epd/styles.css");
 
   web.on("/favicon.ico", [this]() {
     web.send(404, "text/plain", "icon");
-  });
-
-  web.on("/", [this]() {
-      //POST
-      Serial.println("I guess this is a post?");
   });
 
   web.onNotFound([this]() {
@@ -45,7 +40,7 @@ void Srvr::init() {
     );
 
     web.sendHeader("Location", "/index.html", true);
-    web.send(301, "text/plain", "Redirecting");
+    web.send(301, "text/plain", web.uri().c_str());
   });
 
   web.begin();

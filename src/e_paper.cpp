@@ -8,11 +8,13 @@ Radiate *radiate = new Radiate("My IoT Project");
 Srvr *server = new Srvr();
 
 void setup() {
+  Serial.begin(115200);
+  delay(1000);
+
   if (!SPIFFS.begin(false)) {
     Serial.println("SPIFFS Mount Failed");
   }
 
-  Serial.begin(115200);
   radiate->connectOrPortalize();
   server->init();
 
