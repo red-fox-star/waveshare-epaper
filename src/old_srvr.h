@@ -3,7 +3,7 @@
 #include "buff.h" // POST request data accumulator
 #include "epd.h"  // e-Paper driver
 
-bool Srvr__loop() {
+void Srvr__loop() {
     // Set buffer's index to zero
     // It means the buffer is empty initially
     Buff__bufInd = 0;
@@ -63,6 +63,4 @@ bool Srvr__loop() {
         //Print log message: show
         Serial.print("\r\nSHOW");
     }
-
-    return true;
 }

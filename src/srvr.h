@@ -1,7 +1,7 @@
 #pragma once
 
-#include <WebServer.h>
-#include <SPIFFS.h>
+#include "WebServer.h"
+#include "SPIFFS.h"
 
 
 class Srvr {
@@ -12,4 +12,6 @@ class Srvr {
 
   private:
     WebServer web;
+
+    void handleData();
 };
