@@ -1,3 +1,5 @@
+#include "Arduino.h"
+#include "epd.h"
 /**
   ******************************************************************************
   * @file    edp2in9.h
@@ -51,13 +53,6 @@ int EPD_Init_2in9b()
 }
 
 /************************************************************************************/
-#define UBYTE   uint8_t
-#define UWORD   uint16_t
-#define UDOUBLE uint32_t
-
-
-#define EPD_2IN9D_WIDTH   128
-#define EPD_2IN9D_HEIGHT  296
 
 const unsigned char EPD_2IN9D_lut_vcomDC[] = {
     0x00, 0x08, 0x00, 0x00, 0x00, 0x02,

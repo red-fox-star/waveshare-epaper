@@ -3,6 +3,7 @@
 #include "WebServer.h"
 #include "SPIFFS.h"
 
+#include "old_srvr.h"
 
 class Srvr {
   public:

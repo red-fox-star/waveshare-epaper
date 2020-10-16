@@ -1,3 +1,5 @@
+#include "Arduino.h"
+#include "epd.h"
 /**
   ******************************************************************************
   * @file    edp7in5_HD.h
@@ -25,7 +27,7 @@ void EPD_7IN5B_HD_Readbusy(void)
     Serial.print("e-Paper busy release\r\n");
 }
 
-static void EPD_7IN5B_HD_Show(void)
+void EPD_7IN5B_HD_Show(void)
 {
     EPD_SendCommand(0x22);
     EPD_SendData(0xC7);

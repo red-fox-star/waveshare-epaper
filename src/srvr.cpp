@@ -32,6 +32,7 @@ void Srvr::loop() {
 }
 
 void Srvr::handleData() {
+    Srvr__initializeBuffer();
 }
 
   /*

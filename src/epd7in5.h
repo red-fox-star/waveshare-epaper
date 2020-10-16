@@ -1,3 +1,5 @@
+#include "Arduino.h"
+#include "epd.h"
 /**
   ******************************************************************************
   * @file    edp7in5.h
@@ -34,7 +36,7 @@ int EPD_7in5__init()
 /*****************************************************************************
                       EPD_7in5_V2
 ******************************************************************************/
-static void EPD_7in5_V2_Readbusy(void)
+void EPD_7in5_V2_Readbusy(void)
 {
     Serial.print("\r\ne-Paper busy\r\n");
     unsigned char busy;
@@ -47,7 +49,7 @@ static void EPD_7in5_V2_Readbusy(void)
     Serial.print("e-Paper busy release\r\n");
 }
 
-static void EPD_7IN5_V2_Show(void)
+void EPD_7IN5_V2_Show(void)
 {
     EPD_SendCommand(0x12);			//DISPLAY REFRESH
     delay(100);	        //!!!The delay here is necessary, 200uS at least!!!
