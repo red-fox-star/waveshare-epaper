@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "WebServer.h"
 #include "SPIFFS.h"
 
@@ -14,5 +16,5 @@ class Srvr {
   private:
     WebServer web;
 
-    void handleData();
+    void handleData(std::string uri);
 };

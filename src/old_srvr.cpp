@@ -1,13 +1,6 @@
 #include "old_srvr.h"
 
-void Srvr__initializeBuffer() {
-    // Set buffer's index to zero
-    // It means the buffer is empty initially
-    Buff__bufInd = 0;
-}
-
-void Srvr__loop() {
-
+bool Srvr__loop() {
     // e-Paper driver initialization
     if (Buff__signature(Buff__bufInd - 4, "EPD")) {
         Serial.print("\r\nEPD\r\n");
@@ -19,6 +12,7 @@ void Srvr__loop() {
 
         // Initialization
         EPD_dispInit();
+        return true;
     }
 
     // Image loading
@@ -30,6 +24,7 @@ void Srvr__loop() {
         // if there is loading function for current channel (black or red)
         if (EPD_dispLoad != 0)
             EPD_dispLoad();
+        return true;
     }
 
     // Select the next data channel
@@ -53,6 +48,7 @@ void Srvr__loop() {
 
         // Setup the function for loading choosen channel's data
         EPD_dispLoad = EPD_dispMass[EPD_dispIndex].chRd;
+        return true;
     }
 
     // If the loading is complete, then...
@@ -62,5 +58,8 @@ void Srvr__loop() {
 
         //Print log message: show
         Serial.print("\r\nSHOW");
+        return true;
     }
+
+    return false;
 }

@@ -2,7 +2,7 @@
 
 Srvr::Srvr() {
   WebServer web(80);
-  LoggingHandler logger();
+  LoggingHandler logger;
 }
 
 void Srvr::init() {
@@ -18,21 +18,28 @@ void Srvr::init() {
 
 
   web.onNotFound([this]() {
-    // this->buffer.set(std::string(web.uri().c_str()));
-    this->handleData();
+    this->handleData((std::string) web.uri().c_str());
+    web.send(200, "text/plain", "");
   });
 
   web.begin();
 
-  Serial.printf("Portal server started at %s\n", WiFi.localIP().toString().c_str());
+  Serial.printf("Portal server started at http://%s\n", WiFi.localIP().toString().c_str());
 }
 
 void Srvr::loop() {
   web.handleClient();
 }
 
-void Srvr::handleData() {
-    Srvr__initializeBuffer();
+bool Srvr::handleData(std::string uri) {
+  Buff__bufInd = 0;
+
+  for (const int &q: uri) {
+    // Save it in the buffer and increment its index
+    Buff__bufArr[Buff__bufInd++] = (byte)q;
+
+    if (Srvr__loop()) break;
+  }
 }
 
   /*

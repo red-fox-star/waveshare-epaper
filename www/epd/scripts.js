@@ -367,19 +367,21 @@ function u_line(a, k1, k2) {
 }
 
 function uploadImage() {
-  var c = getElm('canvas');
+  var canvas = getElm('canvas');
   var w = dispW = c.width;
   var h = dispH = c.height;
-  var p = c.getContext('2d').getImageData(0, 0, w, h);
+  var image_data = canvas.getContext('2d').getImageData(0, 0, w, h);
   var a = new Array(w * h);
   var i = 0;
   for (var y = 0; y < h; y++)
-    for (var x = 0; x < w; x++, i++) a[i] = getVal(p, i << 2);
+    for (var x = 0; x < w; x++, i++) a[i] = getVal(image_data, i << 2);
   dispX = 0;
   pxInd = 0;
   stInd = 0;
   xhReq = new XMLHttpRequest();
-  rqPrf = 'http://' + getElm('ip_addr').value + '/';
+  rqPrf = '/';
+
+  // line-by-line
   if (epdInd == 3) {
     xhReq.onload = xhReq.onerror = function() {
       if (stInd == 0) return u_line(a, 0, 100);
@@ -387,6 +389,8 @@ function uploadImage() {
     };
     return u_send('EPDd_', false);
   }
+
+  // monochrome
   if ((epdInd == 0) || (epdInd == 3) || (epdInd == 6) || (epdInd == 7) || (epdInd == 9) || (epdInd == 12) || (epdInd == 16) || (epdInd == 19) || (epdInd == 22)) {
     xhReq.onload = xhReq.onerror = function() {
       if (stInd == 0) return u_data(a, 0, 0, 100);
@@ -394,6 +398,8 @@ function uploadImage() {
     };
     return u_send('EPD' + String.fromCharCode(epdInd + 97) + '_', false);
   }
+
+  // monochrome
   if (epdInd > 15 && epdInd < 22) {
     xhReq.onload = xhReq.onerror = function() {
       if (stInd == 0) return u_data(a, -1, 0, 100);
