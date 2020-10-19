@@ -1,5 +1,6 @@
 #include "buff.h"
 int Buff__bufInd = 0;
+char Buff__bufArr[Buff__SIZE];
 
 /* Reads a word from the buffer at specified position ------------------------*/
 int Buff__getByte(int index)

@@ -41,7 +41,7 @@ void EPD_SendCommand(byte command);
 void EPD_SendData(byte data);
 
 /* Waiting the e-Paper is ready for further instructions ---------------------*/
-void EPD_WaitUntilIdle() ;
+void EPD_WaitUntilIdle();
 
 /* Send a one-argument command -----------------------------------------------*/
 void EPD_Send_1(byte c, byte v1);
@@ -62,13 +62,13 @@ void EPD_Send_5(byte c, byte v1, byte v2, byte v3, byte v4, byte v5);
 void EPD_lut(byte c, byte l, byte*p);
 
 /* Writting lut-data of the black-white channel ------------------------------*/
-void EPD_SetLutBw(byte*c20, byte*c21, byte*c22, byte*c23, byte*c24) ;
+void EPD_SetLutBw(byte*c20, byte*c21, byte*c22, byte*c23, byte*c24);
 
 /* Writting lut-data of the red channel --------------------------------------*/
-void EPD_SetLutRed(byte*c25, byte*c26, byte*c27) ;
+void EPD_SetLutRed(byte*c25, byte*c26, byte*c27);
 
 /* This function is used to 'wake up" the e-Paper from the deep sleep mode ---*/
-void EPD_Reset() ;
+void EPD_Reset();
 
 /* e-Paper initialization functions ------------------------------------------*/ 
 extern bool EPD_invert;           // If true, then image data bits must be inverted
@@ -127,42 +127,17 @@ void EPD_dispInit();
 #define UWORD   uint16_t
 #define UDOUBLE uint32_t
 
-#define EPD_2IN9D_WIDTH   128
-#define EPD_2IN9D_HEIGHT  296
-int EPD_Init_1in54();
-int EPD_Init_1in54b();
-int EPD_Init_1in54c();
-int EPD_Init_2in13();
-int EPD_Init_2in13b();
-int EPD_Init_2in13d();
-int EPD_Init_2in7() ;
-int EPD_Init_2in7b() ;
-int EPD_Init_2in9() ;
 void EPD_SetFullReg(void);
-void EPD_2IN9D_ReadBusy(void);
-void EPD_2IN9D_Show(void);
-void EPD_2IN9D_Clear(void);
-int EPD_Init_2in9d();
-int EPD_Init_2in9b();
-int EPD_Init_4in2();
-int EPD_Init_4in2b();
-int EPD_5in83__init();
-int EPD_5in83b__init();
-int EPD_7in5__init();
-void EPD_7in5_V2_Readbusy(void);
-void EPD_7IN5_V2_Show(void);
-int EPD_7in5_V2_init();
-int EPD_7in5B_V2_Init(void);
-void EPD_7IN5B_HD_Readbusy(void);
-void EPD_7IN5B_HD_Show(void);
-int EPD_7IN5B_HD_init();
-
-// data structure constants from the epaper displays that for some reason need global scope
-extern const unsigned char lut_vcomDC_2in13d[];
-extern const unsigned char lut_ww_2in13d[];
-extern const unsigned char lut_bw_2in13d[];
-extern const unsigned char lut_wb_2in13d[];
-extern const unsigned char lut_bb_2in13d[];
 
 /* Array of sets describing the usage of e-Papers ----------------------------*/
 extern EPD_dispInfo EPD_dispMass[25];
+
+#include "epd1in54.h"
+#include "epd2in13.h"
+#include "epd2in7.h"
+#include "epd2in9.h"
+#include "epd4in2.h"
+#include "epd5in83.h"
+#include "epd7in5.h"
+#include "epd7in5_HD.h"
+

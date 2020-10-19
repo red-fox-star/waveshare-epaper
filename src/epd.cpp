@@ -1,5 +1,10 @@
 #include "epd.h"
 
+bool EPD_invert;           // If true, then image data bits must be inverted
+int  EPD_dispIndex;        // The index of the e-Paper's type
+int  EPD_dispX, EPD_dispY; // Current pixel's coordinates (for 2.13 only)
+void(*EPD_dispLoad)();     // Pointer on a image data writting function
+
 EPD_dispInfo EPD_dispMass[25] =
 {
     { EPD_Init_1in54 , EPD_loadA, -1  , 0,         EPD_showA, "1.54 inch"   },// a 0
