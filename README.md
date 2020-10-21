@@ -1,5 +1,5 @@
 # waveshare-epaper
-A working and remodeled demo libary for the waveshare esp32 epaper driver board.
+A working and remodeled demo library for the waveshare esp32 epaper driver board.
 
 Originally based off of the Oct-2020 [sample code](https://www.waveshare.com/wiki/E-Paper_ESP32_Driver_Board), this fork:
 
@@ -43,6 +43,6 @@ The web interface code is a custom microframework and has been minified, either 
 The web interface handles all the image processing before upload to the board, which is a clever way to save space on the chip but may make it difficult to configure the chip to fetch an image from the internet and display it without an intermediate processor doing the heavy lifting.
 
 ### Display driver
-The display performance isn't great. It takes about a minute for the browser to upload the image and another 30s for the display to render (and re-render) itself a coulpe dozen times at varying refresh rates in order to make the image viewable. This could be deliberate, accidental, or a bug I introduced.
+The display performance isn't great. It takes about a minute for the browser to upload the image and another 30s for the display to render (and re-render) itself a couple dozen times at varying refresh rates in order to make the image viewable. This could be deliberate, accidental, or a bug I introduced.
 
 Sometimes the display will render the image off center. Sometimes it will render the image correctly, except one chunk of the image will be misplaced. Sometimes the coloring will be strange where colors "overlap."
